@@ -5,6 +5,45 @@ use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 fn main() {
     println!("Main function");
     println!("");
+
+    let concept = var_name();
+
+    print!("Today we will study: {}", concept);
+}
+
+pub fn var_name() -> &'static str {
+    "Justification"
+}
+
+// statements do not return a value; eg let
+// expressions do return a value; they do not use a semicolon
+
+// let a = ["Jesus"; 5];
+// is the same as ["Jesus", "Jesus", "Jesus", "Jesus", "Jesus"]
+
+pub fn char_vs_str() {
+
+    // for char literals use only ''
+    let char_var = 'A';
+
+    // for string literals use only ""
+    let string_var = "AAA";
+
+    print!("{} {}", char_var, string_var);
+}
+
+pub fn mut_vs_shadowing() {
+
+    let x = 5;
+
+    let x = x + 1; // using let again allows us to change the value; as well as the type while retaining variable name
+
+    {
+        let x = x * 2;
+        println!("The value of x in the inner scope is: {}", x);
+    }
+
+    println!("The value of x is: {}", x);
 }
 
 pub fn guessing_game() {
@@ -33,7 +72,8 @@ pub fn guessing_game() {
         // trim removes \r\n {when user enters an input, say 5 the program takes it as 5\r\n}
             // \r is a carriage return and is only added in windows
         // parse converts a variety of number types, which is why we specify u32 after guess
-        let guess: u32 = match guess.trim().parse() {
+            // u32 is a type annotation
+        let guess: usize = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
                 println!("Please enter only positive integers");
