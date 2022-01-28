@@ -1,3 +1,5 @@
+# toml stands for Tom's Obvious Minimal Language
+
 [package]
 name = "first_project"
 version = "0.1.0"

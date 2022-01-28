@@ -3,7 +3,12 @@ use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
 fn main() {
+    println!("Main function");
+    println!("");
+}
 
+pub fn guessing_game() {
+    
     // getting a hidden number to be matched
     let hidden_number = rand::thread_rng().gen_range(1, 151);
     
@@ -25,6 +30,9 @@ fn main() {
             .expect("This failed");  //an error message if the program fails
 
         // converting guess from string into int
+        // trim removes \r\n {when user enters an input, say 5 the program takes it as 5\r\n}
+            // \r is a carriage return and is only added in windows
+        // parse converts a variety of number types, which is why we specify u32 after guess
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
