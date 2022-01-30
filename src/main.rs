@@ -6,9 +6,73 @@ fn main() {
     println!("Main function");
     println!("");
 
-    let concept = var_name();
+    if_with_let();
+}
 
-    print!("Today we will study: {}", concept);
+pub fn if_with_let() {
+
+    println!("Enter true or false");
+
+    let mut user_input = String::new();
+
+    io::stdin()
+        .read_line(&mut user_input)
+        .expect("Errorrr message");
+
+    let user_input: bool = match user_input.trim().parse() {
+        Ok(boolean) => boolean,
+        Err(_) => todo!(), // print statement does not work if it is not in a loop
+    };
+
+    let mut x = 0;
+
+    println!("x before is {x}");
+
+    if user_input == true {
+        x = 5;
+    } else {
+        x = 3;
+    }
+
+    let y = if x>4 { 15 } else {13}; // this if else statement must have the same compatible data types
+
+    print!("x is {x} y is {y}")
+}
+
+pub fn if_conditional() {
+    
+    loop {
+
+        let mut x = String::new();
+
+        println!("Enter a number");
+
+        io::stdin()
+            .read_line(&mut x)
+            .expect("Error");
+
+        let x: u32 = match x.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Please enter only positive integers");
+                continue;
+            }
+        };
+        
+        if x % 12 == 0 {
+            println!("{x} is divisible by 12");
+        } else if x % 8 == 0 {
+            println!("{x} is divisible by 8");
+        } else if x % 2 == 0 {
+            println!("{x} is divisible by 2");
+        } else {
+            println!("{x} is not divisible by 12");
+            println!("{x} is not divisible by 8");
+            println!("{x} is not divisible by 2");
+            print!("Not divisible by these numbers at all");
+            break;
+        }
+    }
 }
 
 pub fn var_name() -> &'static str {
@@ -73,7 +137,7 @@ pub fn guessing_game() {
             // \r is a carriage return and is only added in windows
         // parse converts a variety of number types, which is why we specify u32 after guess
             // u32 is a type annotation
-        let guess: usize = match guess.trim().parse() {
+        let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
                 println!("Please enter only positive integers");
