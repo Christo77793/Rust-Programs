@@ -2,11 +2,37 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
+// Book number 1: Page number 74
+// Book number 2: Not started
+
 fn main() {
     println!("Main function");
     println!("");
+    
+    loop_with_name();
+}
 
-    if_with_let();
+pub fn loop_with_name() {
+    let mut count = 0;
+
+    'loop_1: loop {
+
+        println!("Count is {}", count);
+        let mut remaining = 10;
+
+        loop {
+            println!("Remaining is {}", remaining);
+            if remaining == 9 {
+                break;
+            }
+            if count == 2{
+                break 'loop_1;
+            }
+            remaining -= 1;
+        }
+        count += 1;
+    }
+    print!("Program end! Count is {}", count);
 }
 
 pub fn if_with_let() {
@@ -34,7 +60,7 @@ pub fn if_with_let() {
         x = 3;
     }
 
-    let y = if x>4 { 15 } else {13}; // this if else statement must have the same compatible data types
+    let y = if x>4 {15} else {13}; // this if else statement must have the same compatible data types
 
     print!("x is {x} y is {y}")
 }
