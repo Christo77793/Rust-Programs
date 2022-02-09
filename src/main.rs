@@ -2,14 +2,219 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 74
+// Book number 1: Page number 79
 // Book number 2: Not started
 
 fn main() {
     println!("Main function");
     println!("");
     
-    loop_with_name();
+    days_of_christmans();
+}
+
+pub fn days_of_christmans() {
+
+    let number_of_days = 12;
+
+    let song_lyrics = 
+        [
+        "My true love sent to me", //0
+        "And a partridge in a pear tree", //1
+        "Two turtle-doves", //2
+        "Three French hens", //3
+        "Four calling birds", //4
+        "Five golden rings (five golden rings)", //5
+        "Six geese a-laying", //6
+        "Seven swans a-swimming", //7
+        "Eight maids a-milking", //8
+        "Nine ladies dancing", //9
+        "Ten lords a-leaping", //10
+        "Eleven pipers piping", //11
+        "Twelve drummers drumming", //12
+        "A partridge in a pear tree", //13
+        ];
+
+    for day_number in 0 .. number_of_days {
+
+        let exact_day_number = day_number + 1;
+
+        println!("");
+        println!("Day Number: {}", exact_day_number);
+
+        // Day 1
+        if exact_day_number == 1 {
+
+            println!("On the {}st day of Christmas", exact_day_number);
+            println!("{}", song_lyrics[0]);
+        
+            println!("{}", song_lyrics[13]);
+        }
+
+        // Day 2
+        else if exact_day_number == 2 {
+
+            println!("On the {}nd day of Christmas", exact_day_number);
+            println!("{}", song_lyrics[0]);
+            
+            for lyric_index in (1 ..exact_day_number + 1).rev() {
+                println!("{}", song_lyrics[lyric_index]);
+            }
+        }
+
+        // Day 3
+        else if exact_day_number == 3 {
+
+            println!("On the {}rd day of Christmas", exact_day_number);
+            println!("{}", song_lyrics[0]);
+            
+            for lyric_index in (1 ..exact_day_number + 1).rev() {
+                println!("{}", song_lyrics[lyric_index]);
+            }
+        }
+
+        // Day 4 and onwards
+        else if exact_day_number >= 4 {
+
+            println!("On the {}th day of Christmas", exact_day_number);
+            println!("{}", song_lyrics[0]);
+            
+            for lyric_index in (1 ..exact_day_number + 1).rev() {
+                println!("{}", song_lyrics[lyric_index]);
+            }
+        }
+    }
+}
+
+pub fn fibonnaci() {
+    
+    loop {
+
+        let mut user_input = String::new();
+
+        println!("Enter the nth number: ");
+
+        io::stdin()
+            .read_line(&mut user_input)
+            .expect("Error Message");
+
+        let user_input: u32 = match user_input.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Enter numbers only");
+                continue;
+            }
+        };
+
+        let mut a = 0;
+        let mut b = 0;
+        let mut c = 1;
+
+        println!("Fibonacci starts");
+
+        print!("0 1 ");
+
+        for _x in 0 .. user_input {
+
+            a = b + c;
+            b = c;
+            c = a;
+
+            print!("{} ", a);
+
+        }
+
+        break;
+    }
+}
+
+pub fn farenheit_celcius() {
+
+    loop {
+
+        let mut user_input = String::new();
+
+        println!("Enter the temperature:");
+
+        io::stdin()
+            .read_line(&mut user_input)
+            .expect("Error Message!!!");
+
+        let user_input: f32 = match user_input.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Please enter only numbers");
+                continue;
+            }
+        };
+
+        println!("Do you want to convert it to Farenheit or Celcius?");
+
+        println!("Farnheit to Celcius: Enter 1");
+        println!("Celcius to Farnheit: Enter 2");
+
+        let mut user_choice = String::new();
+
+        io::stdin()
+            .read_line(&mut user_choice)
+            .expect("Error Message!!!");
+
+        let user_choice: f32 = match user_choice.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Please enter only numbers");
+                continue;
+            }
+        };
+
+        if user_choice == 1.0 {
+            let result: f32 = (((user_input - 32.0) * 5.0) / 9.0) as f32;
+
+            println!("The temperature in Celcius is {:.32}C", result);
+            println!("");
+        }
+        else if user_choice == 2.0 {
+            let result: f32 = (((user_input * 9.0) / 5.0) + 32.0) as f32;
+
+            println!("The temperature in Farenheit is {:.32}F", result);
+            break;
+        }
+    }
+}
+
+pub fn for_with_arrays(){
+
+    let array = ["Jesus", "is", "King!"];
+
+    let mut array_index = 0;
+
+    for x in array {
+        println!("{}, and array index is: {}",x, array_index);
+        
+        array_index += 1;
+    }
+}
+
+pub fn loop_with_inner_break(){
+
+    let mut x = 1;
+
+    let y = 
+
+        loop {
+
+            x += 4;
+
+            if x == 3 {
+                break x * 5;
+            }
+
+            if x == 5 {
+                break x * 5;
+            }
+
+        };
+
+    println!("x is {} and y is {}", x ,y);
 }
 
 pub fn loop_with_name() {
