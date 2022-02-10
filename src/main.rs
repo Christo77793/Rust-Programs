@@ -2,14 +2,20 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 79
+// Book number 1: Page number 89
 // Book number 2: Not started
 
 fn main() {
     println!("Main function");
     println!("");
     
-    days_of_christmans();
+    let mut s = String::from("BLAHHHHHH");
+
+    println!("s before pushing is {}", s);
+
+    s.push_str(" YADOOO");
+
+    println!("s after pushing is {}", s);
 }
 
 pub fn days_of_christmans() {
@@ -105,7 +111,7 @@ pub fn fibonnaci() {
             }
         };
 
-        let mut a = 0;
+        let mut a:i32;
         let mut b = 0;
         let mut c = 1;
 
