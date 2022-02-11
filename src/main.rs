@@ -2,20 +2,125 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 89
+// Book number 1: Page number 99
 // Book number 2: Not started
 
 fn main() {
     println!("Main function");
     println!("");
+
+    reference_test();
+}
+
+pub fn reference_test() {
+
+    let mut s = String::from("Robert Pattinson");
+
+    println!("s is {}", s);
+
+    change(&mut s);
+
+    println!("s is {}", s);
+}
+
+/*
+You can only reference one mutable reference at a time, the following will fail
+
+let x = &mut s; 
+let y = &mut s;
+
+But if we use x before assigning y it will work fine
+
+let x = &mut s; 
+println!("x is {}", x);
+
+let y = &mut s;
+println!("y is {}", y);
+*/
+
+pub fn change(string_: &mut String) {
+
+    string_.push_str(" is The Batman!");
+}
+
+pub fn referencing_function() {
+
+    let var1 = String::from("The Batman");
     
-    let mut s = String::from("BLAHHHHHH");
+    let var2 = string_len(&var1);
 
-    println!("s before pushing is {}", s);
+    println!("Length of '{}' is {}", var1, var2);
+}
 
-    s.push_str(" YADOOO");
+/*
+We can use referencing to use the value of another variable without taking it's ownership!
+*/
 
-    println!("s after pushing is {}", s);
+pub fn string_len(string_var: &String) -> usize {
+    string_var.len()
+}
+
+#[allow(non_snake_case)]
+pub fn ownership_Test() {
+    
+    let var1 = ownership_Test_1();
+
+    println!("Checking scope of var1 {}", var1);
+
+    let var2 = String::from("Ze Batman");
+
+    println!("Checking scope of var2 {}", var2);
+
+    let var3 = ownership_Test_2(var2);
+
+    println!("Checking scope of var3 {}", var3);
+
+    // println!("Checking scope of var2 {}", var2); // will not run as ownership of var2 has been transferred to var.
+}
+
+#[allow(non_snake_case)]
+pub fn ownership_Test_1() -> String {
+
+    let test_var = String::from("The Batman");
+
+    test_var
+}
+
+#[allow(non_snake_case)]
+pub fn ownership_Test_2(test_string:String) -> String {
+
+    test_string
+}
+
+pub fn ownership_test() {
+
+    let x = String::from("BLEH");
+
+    println!("x now is {}", x); // x should give it's value now
+
+    ownership_test_1(x);
+
+    // println!("x now is {}", x); // x won't give it's value now as it has gone out of scope
+
+    let y = 15;
+
+    ownership_test_2(y);
+
+    println!("y now is {}", y);
+}
+
+/* 
+Ownership works the same as when assigning a value as when we pass a value to a function.
+x's value wont be retained after passing it a function, since the String literal is stored on a heap due to it's unkown size at compile time.
+So once it is passed to another function the value goes out of scope and is no longer usable.
+*/
+
+pub fn ownership_test_1(test_string: String) {
+    println!("In ownership test fun {}", test_string);
+} // here drop is called and the memory is freed
+
+pub fn ownership_test_2(test_int: i32) {
+    println!("In ownership test fun {}", test_int);
 }
 
 pub fn days_of_christmans() {
