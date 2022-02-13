@@ -2,15 +2,73 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 99
+// Book number 1: Page number 114
 // Book number 2: Not started
+
+// working with Struct
+pub struct Movie {
+    name: String,
+    genre: String,
+    rating: u32,
+}
 
 fn main() {
     println!("Main function");
     println!("");
 
-    reference_test();
+    /*
+    // custom struct fn to learn struct init shorthand
+
+    let struct_var = struct_init(String::from("The Batman"), 10);
+    print!("Movie name is {}, it is rated {} on IMDB and is of the {} genre", struct_var.name, struct_var.rating, struct_var.genre);
+    */
 }
+
+pub fn struct_fn() {
+    let mut movie1 = Movie {  // if instance is mut we can change the values of a specific field
+        genre: String::from("Superhero"),
+        rating: 10,
+        name: String::from("The Batman")
+    };  // we cannot make one specific field such as name or rating mutable, the entire instance must be mutable
+
+    // before changing the value
+    println!("I am going to watch {} and I am so excited!", movie1.name);
+    println!("The genre is {} and it is rated {}!", movie1.genre, movie1.rating);
+    println!("");
+
+    movie1.genre = String::from("Thriller");
+
+    // before changing the value
+    println!("I am going to watch {} and I am so excited!", movie1.name);
+    println!("The genre is {} and it is rated {}!", movie1.genre, movie1.rating);
+    println!("");
+}
+
+/*
+With stucts we can use the init shorthand to acess parameters in a quicker way,
+but only if the parameter name and field name are the same
+*/
+
+pub fn struct_init(name: String, rating: u32) -> Movie {
+    Movie {
+        name,
+        rating,
+        genre: String::from("Action"),
+    }
+}
+
+/*
+When using indices we use the following
+
+    let var = String::from("The Batman");
+
+    let len = var.len();
+
+    let var1 = &var[0 .. len];
+    let var2 = &var[..]
+
+var1 will be the same as var2
+*/
 
 pub fn reference_test() {
 
