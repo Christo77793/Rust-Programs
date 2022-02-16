@@ -2,15 +2,8 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 114
+// Book number 1: Page number 128
 // Book number 2: Not started
-
-// working with Struct
-pub struct Movie {
-    name: String,
-    genre: String,
-    rating: u32,
-}
 
 fn main() {
     println!("Main function");
@@ -22,14 +15,104 @@ fn main() {
     let struct_var = struct_init(String::from("The Batman"), 10);
     print!("Movie name is {}, it is rated {} on IMDB and is of the {} genre", struct_var.name, struct_var.rating, struct_var.genre);
     */
+    
+    struct_use();
+}
+
+#[derive(Debug)]
+pub struct Rectangle {
+    width: u32,
+    height: u32
+}
+
+// impl stands for implementation
+impl Rectangle {
+    fn area_calculator(
+        &self  // this actually is a short form for self: &Self
+        // Self is an alias for the type that the impl block is for
+    ) -> u32 {
+    
+        self.width * self.height
+    }
+
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+
+    fn height(&self) -> bool {
+        self.height > 0
+    }
+
+    fn validate(&self) -> bool {
+
+        // Checking if width * height is greater than 
+        self.width > 0 && self.height > 0
+    }
+}
+
+pub fn struct_use() {
+
+    let rect1 = Rectangle {
+        width: 55,
+        height: 55
+    };
+
+    // if rect1.validate() {  // using custom functions
+    if rect1.height() && rect1.width() {  //using getters
+    
+        // We can calculate since values are > 0
+        println!("Values are valid");
+        println!("The area of the rectangle is {}", rect1.area_calculator());
+        println!("Values printed using a method fn");
+    }
+    else {
+        println!("Values not valid");
+    }
+}
+
+pub fn debug_struct() {
+    
+    let rect1 = Rectangle {
+        width: 1,
+        height: 2,
+    };
+
+    println!("Values of the instance rect1 is {:?}", rect1);
+    // Since we cannot directly display the values of a struct we need to use the specifier :?
+    // We also need to add "#[derive(Debug)]" to the struct we are creating an instance of
+}
+
+#[allow(non_snake_case)]
+pub fn tuple_struct() {
+
+    struct Ratings(i32, i32);
+
+    let Batman_Ratings = Ratings(10, 10);
+
+    let Endgame_Ratings = Ratings(4, 10);
+
+    println!("The Batman was rated as {} out of {}", Batman_Ratings.0, Batman_Ratings.1);
+    
+    println!("My personal rating of Endgame is {} out of {}", Endgame_Ratings.0, Endgame_Ratings.1);
+}
+
+// working with Struct
+pub struct Movie {
+    name: String,
+    genre: String,
+    rating: u32,
 }
 
 pub fn struct_fn() {
+
+    // Instance 1
     let mut movie1 = Movie {  // if instance is mut we can change the values of a specific field
         genre: String::from("Superhero"),
         rating: 10,
         name: String::from("The Batman")
     };  // we cannot make one specific field such as name or rating mutable, the entire instance must be mutable
+
+    println!("Instance 1");
 
     // before changing the value
     println!("I am going to watch {} and I am so excited!", movie1.name);
@@ -41,6 +124,17 @@ pub fn struct_fn() {
     // before changing the value
     println!("I am going to watch {} and I am so excited!", movie1.name);
     println!("The genre is {} and it is rated {}!", movie1.genre, movie1.rating);
+    println!("");
+
+    // Instance 2
+    let movie2 = Movie {
+        genre: String::from("Action"),
+        .. movie1  // This instance uses the value from the first instance {except for those we explicitly mention} becaue of this line of code
+    };
+
+    println!("Instance 2");
+    println!("I am going to watch {} and I am so excited!", movie2.name);
+    println!("The genre is {} and it is rated {}!", movie2.genre, movie2.rating);
     println!("");
 }
 
