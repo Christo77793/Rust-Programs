@@ -2,7 +2,7 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 128
+// Book number 1: Page number 138
 // Book number 2: Not started
 
 fn main() {
@@ -16,7 +16,7 @@ fn main() {
     print!("Movie name is {}, it is rated {} on IMDB and is of the {} genre", struct_var.name, struct_var.rating, struct_var.genre);
     */
     
-    struct_use();
+    rect_comparison();
 }
 
 #[derive(Debug)]
@@ -47,6 +47,40 @@ impl Rectangle {
 
         // Checking if width * height is greater than 
         self.width > 0 && self.height > 0
+    }
+
+    fn comparison(&self, second_rect: &Rectangle) -> bool {
+        
+        self.width > second_rect.width && self.height > second_rect.height
+    }
+}
+
+pub fn rect_comparison() {
+    
+    let rect1 = Rectangle {
+        width: 55,
+        height: 55
+    };
+
+    let rect2 = Rectangle {
+        width: 5,
+        height: 10
+    };
+    let rect3 = Rectangle {
+        width: 75,
+        height: 10
+    };
+
+    if rect1.comparison(&rect2) {
+        println!("Rectangle 1 can hold Rectangle 2");
+    } else {
+        println!("Rectangle 1 cannot hold Rectangle 2");
+    }
+
+    if rect1.comparison(&rect3) {
+        println!("Rectangle 1 can hold Rectangle 3");
+    } else {
+        println!("Rectangle 1 cannot hold Rectangle 3");
     }
 }
 
@@ -612,7 +646,7 @@ pub fn guessing_game() {
     // print statment to get input
     println!("The secret number is: {}", hidden_number);
 
-    // looping the take input part till we get the right answer
+    // looping the 'take input' process till we get the right answer
     loop{
         
         // print statment to get input
