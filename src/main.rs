@@ -2,7 +2,7 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 138
+// Book number 1: Page number 151
 // Book number 2: Not started
 
 fn main() {
@@ -15,8 +15,118 @@ fn main() {
     let struct_var = struct_init(String::from("The Batman"), 10);
     print!("Movie name is {}, it is rated {} on IMDB and is of the {} genre", struct_var.name, struct_var.rating, struct_var.genre);
     */
+
+    /*
+    // enum test
+
+    let five = Some(5);
+    let sar = add_one(five);
+    println!("Sar is {:?}", sar);
+    let nooone = add_one(None);
+    println!("Nooone is {:?}", nooone);
+    */
+
+    call_enum();
+}
+
+pub fn call_enum() {
+    let temp_var1 = fraction_fn(Fraction::Quarter);
+    println!("Temp Var is {}", temp_var1);
+
+    let temp_var2 = fraction_fn(Fraction::Half);
+    println!("Temp Var is {}", temp_var2);
+
+    let temp_var3 = fraction_fn(Fraction::Three_Quarters);
+    println!("Temp Var is {}", temp_var3);
+
+    let temp_var4 = fraction_fn(Fraction::Whole(Whole_Numbers::Five));
+    println!("Temp Var is {}", temp_var4);
+}
+
+#[allow(non_camel_case_types)]
+#[derive(Debug)]
+#[allow(dead_code)]
+enum Whole_Numbers {
+    One,
+    Two,
+    Three,
+    Four,
+    Five
+}
+
+#[allow(non_camel_case_types)]
+enum Fraction {
+    Quarter,
+    Half,
+    Three_Quarters,
+    Whole(Whole_Numbers)
+}
+
+/*
+When working with matches we must explicitly specify all exhaustive cases
+    if supposing we only want to take action for one or two cases we use 'other' to specify all general cases
+    all cases added after this are ignored by Rust and we will be warned
+    we can use '_' to include cases we would ignore
+        we can also all '_' cases to do nothing by specifying it as
+            _ => ()
+*/
+
+fn fraction_fn(fraction: Fraction) -> f32 {
     
-    rect_comparison();
+    match fraction {
+        Fraction::Quarter => {
+            println!("Invoked 1/4");
+            0.25
+        },
+        Fraction::Half => {
+            println!("Invoked 1/2");
+            0.5
+        },
+        Fraction::Three_Quarters => {
+            println!("Invoked 3/4");
+            0.75
+        },
+        Fraction::Whole(user_number) => {
+            println!("Invoked Whole Numbers");
+            println!("You called {:?} ", user_number);
+            1.0
+        },
+    }
+}
+
+pub fn add_one(var: Option<i32>) -> Option<i32> {
+    match var {
+        Some(i) => {
+            println!("The value is {}", (i + 1));
+            Some(i + 1)
+        },
+        None => {
+            println!("NOne triggered");
+            None
+        }
+    }
+}
+
+/*
+None and Some are variants of the enum Option<T>
+
+    enum Option<T> {
+        None,
+        Some(T),
+    }
+
+Option, None and Some are already included and we do not need to call them explicitly
+*/
+
+pub fn enum_fn() {
+
+    let var1 = None;
+    let var2 = Some(15.3);
+
+    let var3 = var1.unwrap_or(5.5) + var2.unwrap();
+
+    print!("Var 3 is {}", var3);
+    
 }
 
 #[derive(Debug)]
@@ -26,6 +136,7 @@ pub struct Rectangle {
 }
 
 // impl stands for implementation
+#[allow(dead_code)]
 impl Rectangle {
     fn area_calculator(
         &self  // this actually is a short form for self: &Self
@@ -66,6 +177,7 @@ pub fn rect_comparison() {
         width: 5,
         height: 10
     };
+    
     let rect3 = Rectangle {
         width: 75,
         height: 10
