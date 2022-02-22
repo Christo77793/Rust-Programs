@@ -2,8 +2,11 @@ use std::io; //the library to get input
 use rand::Rng; // the library to get the range fn, gen_range
 use std::cmp::Ordering; // the library to get the comparing fn, gen_range
 
-// Book number 1: Page number 151
-// Book number 2: Not started
+/*
+Book number 1: Page number 179
+    {Skimmed through modules, must revise, pg 151}
+Book number 2: Not started
+*/
 
 fn main() {
     println!("Main function");
@@ -26,7 +29,35 @@ fn main() {
     println!("Nooone is {:?}", nooone);
     */
 
-    call_enum();
+    vector_fn();    
+}
+
+pub fn vector_fn() {
+
+    let vec1: Vec<&str> = Vec::new();
+    // when working with Vectors the type annotation must be specified, as Rust does not know the type we need
+    
+    // however we can create a vector variable without the type annotation if we specifiy the values at declaration, and Rust automatically infers the type
+    let vec2 = vec!["The Batman ", "Played by ", "Robert Pattinson"];
+
+    let mut vec3 = Vec::new();
+    // here we do not have to specify the type annotation if we intend to modify the vector with push (or any other) as shown below
+    vec3.push("A detective ");
+    vec3.push("story set");
+    vec3.push("in the early years of Batman");
+
+    let vec_array = [vec1, vec2, vec3];
+    let mut i = 1;
+
+    for vec_element in vec_array{
+        
+        println!("Vector {}", i);
+        for x in vec_element {
+            println!("{}", x);
+        }
+        println!("");
+        i += 1;
+    }
 }
 
 pub fn call_enum() {
