@@ -29,7 +29,98 @@ fn main() {
     println!("Nooone is {:?}", nooone);
     */
 
-    vector_fn();    
+    vector_test();    
+}
+
+/*
+We can use enum variants to create a vector of different types
+*/
+
+#[derive(Debug)]
+enum BatmanMovie {
+    Name(String),
+    Actor(String),
+    Genre(String),
+    Rating(i32),
+    AntcipationTime(f32)
+}
+
+#[allow(non_snake_case)]
+pub fn vector_test() {
+
+    // crazy code to print enum values, either I messed up bad or Rust is going to be challening
+
+    let vector_var = vec![
+        BatmanMovie::Name(String::from("The Batman")),
+        BatmanMovie::Actor(String::from("Robert Pattinson")),
+        BatmanMovie::Genre(String::from("thriller")),
+        BatmanMovie::Rating(10),
+        BatmanMovie::AntcipationTime(2.1)
+    ];
+
+    let mut movieName = String::new();
+    let mut movieActor = String::new();
+    let mut movieGenre = String::new();
+    let mut movieRating = 0;
+    let mut movieAnticipationTime = 0.0;
+
+    match &vector_var[0] {
+        BatmanMovie::Name(movie_name) => {
+            movieName = movie_name.to_string();
+        }
+        _ => println!()
+    }
+
+    match &vector_var[1] {
+        BatmanMovie::Actor(movie_actor) => {
+            movieActor = movie_actor.to_string();
+        }
+        _ => println!()
+    }
+
+    match &vector_var[2] {
+        BatmanMovie::Genre(movie_genre) => {
+            movieGenre = movie_genre.to_string();
+        }
+        _ => println!()
+    }
+
+    match &vector_var[3] {
+        BatmanMovie::Rating(movie_rating) => {
+            movieRating = *movie_rating;
+        }
+        _ => println!()
+    }
+
+    match &vector_var[4] {
+        BatmanMovie::AntcipationTime(movie_AT) => {
+            movieAnticipationTime = *movie_AT;
+        }
+        _ => println!()
+    }
+
+    println!(
+        "I am excited for {:?}. Batman is played by {:?}, and it is told to be a {:?}. I give it a rating of {:?} and I have been waiting for this movie since {:?}.",
+        movieName, movieActor, movieGenre, movieRating, movieAnticipationTime
+    )
+}
+
+pub fn vector_change() {
+    
+    let mut vec1 = vec![1, 2, 3, 4, 5];
+
+    println!("Vector 1");
+    for vec_values in &mut vec1 {
+
+        *vec_values *= 100;
+        print!("{}, ", vec_values);
+    }
+
+    println!("");
+    println!("Vector 2");
+    for x in vec1 {
+        print!("{}, ",x);
+    }
 }
 
 pub fn vector_fn() {
